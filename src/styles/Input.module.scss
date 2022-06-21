@@ -1,0 +1,20 @@
+.style_input{
+    border-radius: 15px;
+    font-family: cursive;
+    padding: 10px;
+
+}
+
+.style_input:hover{
+    border-color: rgba(19, 54, 86, 0.21);
+    border-radius: 20px;
+}
+
+.error_input{
+    box-shadow: 0 20px 40px -20px rgba(230, 44, 44, 0.5);
+    border: 2px solid #df4e4e;
+    border-radius: 15px;
+    padding: 10px;
+    color: black;
+    background:#e68d8d;
+}

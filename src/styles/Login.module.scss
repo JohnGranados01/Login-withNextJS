@@ -1,0 +1,50 @@
+.container_login{
+    margin: auto;
+    text-align: center;
+    
+
+}
+
+.container_card{
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 25px;
+    background-color: #a8caef;
+    border-radius: 20px;
+}
+
+.btn_enviar{
+    border: none;
+    margin-left: 1rem;
+    box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.2);
+    outline: none;
+    cursor: pointer;
+    transition: .4s all;
+}
+
+.btns {
+    background-color: #0e68c8;
+    height:55px;
+    padding:  10px;
+    margin: 10px;
+    width: 100px;
+    color: white;
+    font-weight: 700;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.1);
+}
+
+.btn_enviar:focus,
+.btns:focus {
+    background: #223c87;
+    transform: scale(1);
+}
+
+.label_error{
+    padding: auto;
+    font-family: cursive;
+    font-size: small;
+    color: #c8400e;
+}
