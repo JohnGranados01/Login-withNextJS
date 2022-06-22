@@ -2,8 +2,8 @@ import styles from './../styles/Input.module.scss'
 
 // export function Input({atributo, handleChange, parametro}){
 
-export function Input({atributo, handleChange}){
-
+export function Input({atributo, handleChange, children}){
+// console.log(children)
     return(
         <div>
         <input
@@ -14,6 +14,7 @@ export function Input({atributo, handleChange}){
         type={atributo.type}
         onChange = {(e) => handleChange(e.target.name, e.target.value)}
         />
+        {children}
         </div>
     )
 }
