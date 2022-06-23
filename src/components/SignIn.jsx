@@ -34,7 +34,7 @@ export function SignIn() {
 
     function handleChange(tagName, value) {
         if (tagName == 'password' || tagName == 'passwordVerificar') {
-            const expresion = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{10,15}[^'\s]/
+            const expresion = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/
             if (expresion.test(value)) {
                 const updateUser = {
                     ...user,

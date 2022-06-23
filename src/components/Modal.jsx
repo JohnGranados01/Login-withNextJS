@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
 import { Input } from './Input';
@@ -19,7 +19,7 @@ const customStyles = {
     },
 };
 
-export function ModalCustom() {
+export function ModalCustom({setFirstTime, firstTime}) {
 
     const [user, setUser] = useState({
         password: "",
@@ -27,9 +27,15 @@ export function ModalCustom() {
         conditions: false
     });
 
+    const [changePassword, setChangePassword] = useState(firstTime)
+    const [email, setEmail] = useState('')
+    useEffect(()=> {
+      setEmail(localStorage.getItem('email'))
+      localStorage.setItem('first_time', false)
+    }, [changePassword])
     function handleChange(tagName, value) {
         if (tagName == 'password' || tagName == 'passwordVerificar') {
-            const expresion = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{10,15}[^'\s]/
+            const expresion = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/
             if (expresion.test(value)) {
                 const updateUser = {
                     ...user,
@@ -59,21 +65,22 @@ export function ModalCustom() {
         if (user.password == user.passwordVerificar && user.conditions) {
             const request = async () => {
                 try {
-                    const response = await fetch('http://192.168.0.106:3000/users/changePassword', {
+                    const response = await fetch('http://localhost:3000/users/changePassword', {
                         headers: {
                             'Accept': 'application/json',
                             'Content-Type': 'application/json'
                         },
                         method: 'POST',
                         body: JSON.stringify({
-                            email: 'oscar@mail.com',
+                            email: email,
                             password: user.password,
                             password_confirm: user.passwordVerificar
                         })
                     })
                     const content = await response.json();
-                    console.log(content, '---------------');
                     toast("Contraseña modificada con exito!");
+                    setChangePassword('Cambio')
+                    setFirstTime(false)
                     setIsOpen(false)
                 } catch (error) {
                     toast.error('No se pudo modificar la contraseña')
@@ -125,6 +132,7 @@ export function ModalCustom() {
                     }}
                     handleChange={handleChange}
                 >{!user.conditions && (<span className={styles.label_error}>Las contraseñas son incorrectas</span>)}</Input>
+                <p>Las contraseñas deben tener mínimo 10 caracteres entre mayúsculas y minúsculas <br></br> y contener un caracter especial como #$%!¡¿?</p>
                 <br />
                 <button onClick={handleSubmit} className={styles.btns}> Guardar </button>
             </Modal>
